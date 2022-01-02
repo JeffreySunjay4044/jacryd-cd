@@ -14,6 +14,6 @@ COPY Pipfile.lock ./Pipfile.lock
 RUN pip3 install pipenv
 RUN pip install --upgrade pip
 RUN set -ex && pipenv install --deploy --system
-COPY ./app   ./
-COPY ./resources ./
+COPY ./   ./
+EXPOSE 5000:5000
 CMD ["python", "-u", "main.py", "run"]
