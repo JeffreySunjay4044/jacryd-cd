@@ -1,3 +1,5 @@
 # shellcheck disable=SC2154
 git clone $repositoryAddress
-sh ./$scriptLocation $imageId
+cd $scriptLocation
+docker-compose build --no-cache
+docker-compose up
