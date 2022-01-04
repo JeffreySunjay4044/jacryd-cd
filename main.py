@@ -18,7 +18,13 @@ def executeScript():
     data = request.data
     repositoryUrl = data.repositoryUrl
     scriptLocation = data.scriptLocation
-    subprocess.Popen(['./execute-deploy.sh %s %s %s' % (repositoryUrl, scriptLocation)], shell=True)
+    credentials = data.credentials
+    if credentials is not None:
+        MONGO_CREDS = credentials.mongo_creds
+        REDIS_PWD = credentials.redis_creds
+        OSM_CMDB_URL = credentials.dsm_cmdb_url
+        DOPPLER_TOKEN = credentials.doppler_token
+        subprocess.Popen(['./execute-deploy.sh %s %s %s' % (repositoryUrl, scriptLocation)], shell=True)
     return app.response_class(response=json.dumps({"status": "Success"}), status=200, mimetype='application/json')
 
 if __name__ == '__main__':
